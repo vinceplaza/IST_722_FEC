@@ -35,4 +35,4 @@ models:
     northwind:
       +materialized: table
       database: northwind
-      +schema: dw
+      #+schema: dw

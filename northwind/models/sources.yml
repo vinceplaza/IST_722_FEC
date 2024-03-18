@@ -12,7 +12,7 @@ sources:
             tests:
               - unique
 
-sources: 
+
   - name: northwind
     database: raw
     schema: northwind
