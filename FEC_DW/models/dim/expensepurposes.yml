@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: expensepurposes
+    description: Expense purpose dimension. One row per day
+    columns:
+      - name: expensepurposekey
+        description: The surrogate key of the purpose
+        tests:
+          - not_null
+          - unique
+      - name: expensepurpose
+        description: The natural key of the purpose
+        tests:
+          - not_null
+          - unique

@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: electiontypes
+    description: Expense categories dimension. One row per type.
+    columns:
+      - name: electiontypekey
+        description: The primary surrogate key of the type
+        tests:
+          - not_null
+          - unique
+      - name: electiontypecode
+        description: The natural key of the type
+        tests:
+          - not_null
+          - unique

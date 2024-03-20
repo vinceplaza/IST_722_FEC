@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: expenses
+    description: Operating expense dimension. One row per transaction
+    columns:
+      - name: expensekey
+        description: The surrogate key of the transaction
+        tests:
+          - not_null
+          - unique
+      - name: _fectransactionid
+        description: The natural key of the transaction
+        tests:
+          - not_null
+          - unique

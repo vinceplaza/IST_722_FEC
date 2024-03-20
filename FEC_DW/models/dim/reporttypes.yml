@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: reporttypes
+    description: Report types dimension. One row per type
+    columns:
+      - name: reporttypekey
+        description: The primary surrogate key of the report type
+        tests:
+          - not_null
+          - unique
+      - name: reporttypecode
+        description: The natural key of the report type
+        tests:
+          - not_null
+          - unique

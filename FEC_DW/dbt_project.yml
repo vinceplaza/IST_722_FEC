@@ -32,6 +32,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   fec_dw:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    dim:
+      +schema: dim
+      +materialized: table
+    fact:
+      +schema: fact
+      +materialized: table
+    view:
+      +schema: view
       +materialized: view

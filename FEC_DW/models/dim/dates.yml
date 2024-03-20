@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: dates
+    description: Date dimension. One row per day
+    columns:
+      - name: datekey
+        description: The surrogate key of the day
+        tests:
+          - not_null
+          - unique
+      - name: date
+        description: The date value of the day
+        tests:
+          - not_null
+          - unique

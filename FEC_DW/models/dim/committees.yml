@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: committees
+    description: Committee dimension. One row per committee
+    columns:
+      - name: committeekey
+        description: The surrogate key of the committee
+        tests:
+          - not_null
+          - unique
+      - name: committeeid
+        description: The business / source key of the committee
+        tests:
+          - not_null
+          - unique

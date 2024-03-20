@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: candidates
+    description: Candidate dimension. One row per candidate
+    columns:
+      - name: candidatekey
+        description: The surrogate key of the candidate
+        tests:
+          - not_null
+          - unique
+      - name: candidateid
+        description: The business / source key of the candidate
+        tests:
+          - not_null
+          - unique
