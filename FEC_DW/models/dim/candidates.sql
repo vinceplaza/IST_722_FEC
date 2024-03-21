@@ -1,5 +1,5 @@
 select		distinct 
-			{{ dbt_utils.generate_surrogate_key(['cm.CMTE_ID']) }} as CommitteeKey, 
+			{{ dbt_utils.generate_surrogate_key(['cn.CAND_ID']) }} as CandidateKey, 
 			cn.CAND_ID as CandidateId,
 			cn.CAND_PCC as PrincipalCommitteeId,
 			cn.CAND_PTY_AFFILIATION as PartyCode,

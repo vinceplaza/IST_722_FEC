@@ -1,19 +1,19 @@
-with election types as
+with expensetypes 
+as
 (
-    SELECT		DISTINCT 
-                SUBSTRING(RTRIM(o.TRANSACTION_PGI), 1, 1) AS ElectionTypeCode,
-                CASE SUBSTRING(RTRIM(o.TRANSACTION_PGI), 1, 1)
-                WHEN 'C' THEN 'Convention'
-                WHEN 'G' THEN 'General'
-                WHEN 'P' THEN 'Primary'
-                WHEN 'R' THEN 'Runoff'
-                WHEN 'S' THEN 'Special'
-                ELSE '{unassigned}' END AS ElectionTypeName 
-    FROM		{{source('fec','oppexp')}} o
-    WHERE		ISNUMERIC(SUBSTRING(o.TRANSACTION_PGI, 1, 1)) <>1
-    AND			RTRIM(o.TRANSACTION_PGI) <> ''
+    SELECT	transaction_pgi FROM {{source('fec','oppexp')}} limit 100000
+), contribtypes as
+(
+    SELECT	transaction_pgi FROM {{source('fec','itcont')}} limit 100000
+), alltypes as
+(
+    select transaction_pgi from expensetypes
     UNION
-    SELECT		DISTINCT 
+    select transaction_pgi from contribtypes
+), electiontypes as
+(
+    select 
+                distinct
                 SUBSTRING(RTRIM(o.TRANSACTION_PGI), 1, 1) AS ElectionTypeCode,
                 CASE SUBSTRING(RTRIM(o.TRANSACTION_PGI), 1, 1)
                 WHEN 'C' THEN 'Convention'
@@ -21,13 +21,17 @@ with election types as
                 WHEN 'P' THEN 'Primary'
                 WHEN 'R' THEN 'Runoff'
                 WHEN 'S' THEN 'Special'
-                ELSE '{unassigned}' END AS ElectionTypeName 
-    FROM		{{source('fec','itcont')}} o
-    WHERE		ISNUMERIC(SUBSTRING(o.TRANSACTION_PGI, 1, 1)) <>1
+                ELSE '{unassigned}' END AS ElectionType 
+    FROM		alltypes o
+    WHERE		TRY_CAST(SUBSTRING(o.TRANSACTION_PGI, 1, 1) AS NUMERIC) IS NULL
     AND			RTRIM(o.TRANSACTION_PGI) <> ''
 )
-
-select  
-    {{ dbt_utils.generate_surrogate_key(['cm.CMTE_ID']) }} as ElectionTypeKey,
-    electiontypes.*
-from electiontypes
+select     {{ dbt_utils.generate_surrogate_key(['et.ElectionTypeCode']) }} as ElectionTypeKey,
+            et.*
+from        electiontypes et
+-- )
+-- select * from electiontypes
+-- select  
+--     {{ dbt_utils.generate_surrogate_key(['et.ElectionTypeCode']) }} as ElectionTypeKey,
+--     electiontypes.*
+-- from electiontypes et

@@ -41,16 +41,6 @@ sources:
           - name: expensecategorycode
             tests:
               - unique
-      - name: electiontypes
-        columns:
-          - name: electiontypecode
-            tests:
-              - unique
-      - name: expensepurposes
-        columns:
-          - name: expensepurposecode
-            tests:
-              - unique
       - name: zipcodes
         columns:
           - name: zipcode

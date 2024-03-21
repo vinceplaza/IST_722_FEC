@@ -8,7 +8,7 @@ models:
         tests:
           - not_null
           - unique
-      - name: _fectransactionid
+      - name: fectransactionid
         description: The natural key of the transaction
         tests:
           - not_null

@@ -1,5 +1,5 @@
 select distinct
-    {{ dbt_utils.generate_surrogate_key(['cm.CMTE_ID']) }} as epensecategorykey,
+    {{ dbt_utils.generate_surrogate_key(['ec.ExpenseCategoryCode']) }} as EXPENSECATEGORYKEY,
     ec.ExpenseCategoryCode,
     ec.ExpenseCategoryLabel,
     ec.ExpenseCategoryDesc
