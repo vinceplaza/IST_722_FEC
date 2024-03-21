@@ -1,3 +1,6 @@
+/*
+Query to load the committees dimension. 
+*/
 select		distinct 
             {{ dbt_utils.generate_surrogate_key(['cm.CMTE_ID']) }} as CommitteeKey, 
             cm.CMTE_ID as CommitteeId, 

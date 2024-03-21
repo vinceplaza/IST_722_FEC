@@ -5,4 +5,4 @@ select distinct
     ec.ExpenseCategoryDesc
 from	
     {{source('fec','oppexp')}} s
-    INNER JOIN	{{source('fec','expensecategories')}} ec on RTRIM(s.CATEGORY) = ec.ExpenseCategoryCode
+    inner join	{{source('fec','expensecategories')}} ec on RTRIM(s.CATEGORY) = ec.ExpenseCategoryCode

@@ -29,9 +29,3 @@ as
 select     {{ dbt_utils.generate_surrogate_key(['et.ElectionTypeCode']) }} as ElectionTypeKey,
             et.*
 from        electiontypes et
--- )
--- select * from electiontypes
--- select  
---     {{ dbt_utils.generate_surrogate_key(['et.ElectionTypeCode']) }} as ElectionTypeKey,
---     electiontypes.*
--- from electiontypes et
