@@ -10,7 +10,7 @@
 					d.DateKey as ExpenseDateKey,
 					s.RPT_YR as ReportYear,	
 					cs.CAND_ELECTION_YR as ElectionYear,
-					s.SUB_ID as TransactionId									
+					s.SUB_ID as TransactionId,									
 					s.TRANSACTION_AMT as ExpenseAmountUSD,
 					case s.MEMO_CD when 'x' then 1 else 0 end ExcludeFromTotals
 		from		{{source('fec','oppexp')}} s 
