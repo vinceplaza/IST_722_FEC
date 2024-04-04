@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: transactiontypes
+    description: Transaction types dimension. One row per type.
+    columns:
+      - name: transactiontypekey
+        description: The primary surrogate key of the type
+        tests:
+          - not_null
+          - unique
+      - name: transactiontypecode
+        description: The natural key of the type
+        tests:
+          - not_null
+          - unique

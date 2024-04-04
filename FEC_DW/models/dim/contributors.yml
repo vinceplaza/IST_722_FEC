@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: contributors
+    description: Payees dimension. One row per payee
+    columns:
+      - name: contributorkey
+        description: The primary surrogate key of the payee
+        tests:
+          - not_null
+          - unique

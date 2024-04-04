@@ -1,3 +1,9 @@
+with committees as
+(
+	select distinct cmte_id from {{source('fec','oppexp')}} 
+	union 
+	select distinct cmte_id from {{source('fec','itcont')}} 
+)
 select		distinct 
 			{{ dbt_utils.generate_surrogate_key(['cn.CAND_ID']) }} as CandidateKey, 
 			cn.CAND_ID as CandidateId,
@@ -19,6 +25,6 @@ select		distinct
 			cn.CAND_CITY as City,
 			cn.CAND_ST as StateCode,
 			cn.CAND_ZIP as ZipCode
-from		{{source('fec','oppexp')}} s
+from		committees s
 inner join	{{source('fec','cm')}} cm on s.CMTE_ID = cm.CMTE_ID
 inner join	{{source('fec','cn')}} cn on cm.CAND_ID = cn.CAND_ID

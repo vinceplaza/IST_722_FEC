@@ -1,9 +1,9 @@
 version: 2
 models:
-  - name: expenses
-    description: Operating expense dimension. One row per transaction
+  - name: contributions
+    description: Individual contribution fact. One row per transaction.
     columns:
-      - name: expensekey
+      - name: contributionkey
         description: The surrogate key of the transaction
         tests:
           - not_null

@@ -1,6 +1,12 @@
 /*
 Query to load the committees dimension. 
 */
+with committees as
+(
+	select distinct cmte_id from {{source('fec','oppexp')}} 
+	union 
+	select distinct cmte_id from {{source('fec','itcont')}} 
+)
 select		distinct 
             {{ dbt_utils.generate_surrogate_key(['cm.CMTE_ID']) }} as CommitteeKey, 
             cm.CMTE_ID as CommitteeId, 
@@ -40,6 +46,6 @@ select		distinct
             cm.CMTE_ST as StateCode,
             cm.CMTE_ZIP as ZipCode,
             cn.CAND_ELECTION_YR as _ElectionYear				
-from		{{source('fec','oppexp')}} s
+from		committees s
 inner join	{{source('fec','cm')}} cm on s.CMTE_ID = cm.CMTE_ID
 left join   {{source('fec','cn')}} cn on cm.CAND_ID = cn.CAND_ID
