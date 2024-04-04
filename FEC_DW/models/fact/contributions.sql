@@ -1,5 +1,4 @@
 select	    {{ dbt_utils.generate_surrogate_key(['i.SUB_ID']) }} as ContributionKey,
-            i.SUB_ID AS TransactionId,
             com.CommitteeKey, 
             can.CandidateKey AS CandidateKey, 
             p.ContributorKey,
@@ -10,6 +9,7 @@ select	    {{ dbt_utils.generate_surrogate_key(['i.SUB_ID']) }} as ContributionK
             att.AmendmentTypeKey AS AmendmentTypeKey,
             cast(substring(i.TRANSACTION_DT,5,4) + SUBSTRING(i.TRANSACTION_DT, 1,4) as int) AS ContributionDateKey,
             ifnull(cs.CAND_ELECTION_YR,-1) as ElectionYear,
+            i.SUB_ID AS TransactionId,
             i.TRANSACTION_AMT AS ContributionAmountUSD
 from		{{source('fec','itcont')}}  i
 inner join	DW_DIM.Committees com on i.CMTE_ID = com.CommitteeId
